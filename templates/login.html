@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="login.css") }}">
+</head>
+<body>
+    <form action="{{ url_for("login") }}" method="POST" id="login_in_form">
+        <label>username
+            <input type="text"
+                   name="username"
+                   placeholder="username">
+        </label>
+        <label>email
+            <input type="email"
+                   name="femail"
+                   placeholder="email">
+        </label>
+        <label>password
+            <input type="password"
+                   name="fpass"
+                   placeholder="password"
+                   id="fpass">
+        </label>
+        <script>
+        const lastInput = document.getElementById('fpass');
+        const form = document.getElementById('login_in_form');
+
+         lastInput.addEventListener('keydown', function(e) {
+             if (e.key === 'Enter' && this.value.trim() !== '')
+            {
+                form.submit();
+            }
+         });
+        </script>
+    </form>
+</body>
+</html>

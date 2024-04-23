@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="login.css") }}">
+</head>
+<body>
+    <form action="{{ url_for("sign_up") }}" method="POST" id="sign_in_form">
+        <label>username
+            <input type="text"
+                   name="username"
+                   placeholder="username"
+                   pattern="[^\s]"
+                   required>
+        </label>
+        <label>email
+            <input type="email"
+                   name="femail"
+                   placeholder="email"
+                   pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                   required>
+        </label>
+        <label>password
+            <input type="password"
+                   name="fpass"
+                   placeholder="password"
+                   id="fpass"
+                   required>
+        </label>
+        <script>
+        const lastInput = document.getElementById('fpass');
+        const form = document.getElementById('sign_in_form');
+
+         lastInput.addEventListener('keydown', function(e) {
+             if (e.key === 'Enter' && this.value.trim() !== '')
+            {
+                form.submit();
+            }
+         });
+        </script>
+    </form>
+</body>
+</html>
