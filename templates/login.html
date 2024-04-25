@@ -6,37 +6,103 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for("static", filename="login.css") }}">
+    <link rel="stylesheet" href="{{ url_for("static", filename="sign_up.css") }}">
 </head>
 <body>
-    <form action="{{ url_for("login") }}" method="POST" id="login_in_form">
-        <label>username
-            <input type="text"
-                   name="username"
-                   placeholder="username">
-        </label>
-        <label>email
-            <input type="email"
-                   name="femail"
-                   placeholder="email">
-        </label>
-        <label>password
-            <input type="password"
-                   name="fpass"
-                   placeholder="password"
-                   id="fpass">
-        </label>
-        <script>
-        const lastInput = document.getElementById('fpass');
-        const form = document.getElementById('login_in_form');
+<input class="c-checkbox" type="checkbox" id="start">
+<input class="c-checkbox" type="checkbox" id="progress2">
+<input class="c-checkbox" type="checkbox" id="progress3">
+<input class="c-checkbox" type="checkbox" id="finish">
+<div class="c-form__progress"></div>
 
-         lastInput.addEventListener('keydown', function(e) {
-             if (e.key === 'Enter' && this.value.trim() !== '')
-            {
-                form.submit();
-            }
-         });
-        </script>
+<div class="c-formContainer">
+    <div class="c-welcome">Welcome aboard!</div>
+
+    <form action="{{ url_for("login") }}" method="POST" id="login_form" class="c-form">
+        <div class="c-form__group">
+            <label class="c-form__label" for="username">
+                <input
+                        name="username"
+                        type="text"
+                        id="username"
+                        class="c-form__input"
+                        placeholder=" "
+                        pattern="[^\s]+"
+                        required>
+
+                <label class="c-form__next" for="progress2" role="button">
+                    <span class="c-form__nextIcon"></span>
+                </label>
+
+                <span class="c-form__groupLabel">Enter your username.</span>
+                <b class="c-form__border"></b>
+            </label>
+        </div>
+        <div class="c-form__group">
+            <label class="c-form__label" for="femail">
+                <input
+                        name="femail"
+                        type="email"
+                        id="femail"
+                        class="c-form__input"
+                        placeholder=" "
+                        pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                        required>
+
+                <label class="c-form__next" for="progress3" role="button">
+                    <span class="c-form__nextIcon"></span>
+                </label>
+
+                <span class="c-form__groupLabel">What's your email?</span>
+                <b class="c-form__border"></b>
+            </label>
+        </div>
+               <div class="c-form__group">
+            <label class="c-form__label" for="fpass">
+                <input
+                        name="fpass"
+                        type="password"
+                        id="fpass"
+                        class="c-form__input"
+                        placeholder=" "
+                        required>
+
+                <label class="c-form__next" for="finish" role="button">
+                    <span class="c-form__nextIcon"></span>
+                </label>
+
+                <span class="c-form__groupLabel">Enter your password.</span>
+                <b class="c-form__border"></b>
+            </label>
+        </div>
+
+        <label class="c-form__toggle" for="start">Login<span class="c-form__toggleIcon"></span></label>
+
+      <script>
+          const usernameInput = document.getElementById('username');
+const emailInput = document.getElementById('femail');
+const passwordInput = document.getElementById('fpass');
+const form = document.getElementById('login_form');
+
+passwordInput.addEventListener('keydown', function(e) {
+    const usernameValue = usernameInput.value.trim();
+    const emailValue = emailInput.value.trim();
+    const passwordValue = this.value.trim();
+
+    if (e.key === 'Enter') {
+        if (usernameValue === '' || emailValue === '' || passwordValue === '') {
+            e.preventDefault();
+            alert("Please fill in all the required fields.");
+        } else if (passwordValue.length < 8) {
+            e.preventDefault();
+            alert("Length should be at least 8");
+        } else {
+            form.submit();
+        }
+    }
+});
+      </script>
     </form>
+</div>
 </body>
 </html>
